@@ -1,3 +1,5 @@
+'use client'
+import React, { useEffect, useState } from "react";
 import {
   Backend_skill,
   Frontend_skill,
@@ -5,16 +7,30 @@ import {
   Other_skill,
   Skill_data,
 } from "@/constants";
-import React from "react";
 import SkillDataProvider from "../sub/SkillDataProvider";
 import SkillText from "../sub/SkillText";
 
 const Skills = () => {
+  const [scale, setScale] = useState(1);
+
+  const handleScroll = () => {
+    const scrollY = window.scrollY;
+    const newScale = Math.max(0.8, 1 - scrollY / 1000); // Adjust scaling factor as needed
+    setScale(newScale);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <section
       id="skills"
       className="flex flex-col items-center justify-center gap-3 h-full relative overflow-hidden pb-80 py-20"
-      style={{ transform: "scale(0.9" }}
+      style={{ transform: "scale(0.9)" }}
     >
       <SkillText />
 
@@ -26,6 +42,7 @@ const Skills = () => {
             width={image.width}
             height={image.height}
             index={index}
+            scale={scale} // Pass scale prop here
           />
         ))}
       </div>
@@ -38,9 +55,11 @@ const Skills = () => {
             width={image.width}
             height={image.height}
             index={index}
+            scale={scale} // Pass scale prop here
           />
         ))}
       </div>
+
       <div className="flex flex-row justify-around flex-wrap mt-4 gap-5 items-center">
         {Backend_skill.map((image, index) => (
           <SkillDataProvider
@@ -49,9 +68,11 @@ const Skills = () => {
             width={image.width}
             height={image.height}
             index={index}
+            scale={scale} // Pass scale prop here
           />
         ))}
       </div>
+
       <div className="flex flex-row justify-around flex-wrap mt-4 gap-5 items-center">
         {Full_stack.map((image, index) => (
           <SkillDataProvider
@@ -60,9 +81,11 @@ const Skills = () => {
             width={image.width}
             height={image.height}
             index={index}
+            scale={scale} // Pass scale prop here
           />
         ))}
       </div>
+
       <div className="flex flex-row justify-around flex-wrap mt-4 gap-5 items-center">
         {Other_skill.map((image, index) => (
           <SkillDataProvider
@@ -71,6 +94,7 @@ const Skills = () => {
             width={image.width}
             height={image.height}
             index={index}
+            scale={scale} // Pass scale prop here
           />
         ))}
       </div>

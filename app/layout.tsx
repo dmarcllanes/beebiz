@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import "./globals.css"; // Ensure this file contains any necessary global styles
 import StarsCanvas from "@/components/main/StarBackground";
 import Navbar from "@/components/main/Navbar";
 import Footer from "@/components/main/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
-  title: "Space Portfolio",
-  description: "This is my portfolio",
+  title: "BeeBiz",
+  description: "BeeBiz is a company that provides digital solutions to businesses",
 };
 
 export default function RootLayout({
@@ -20,7 +17,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} bg-[#030014] overflow-y-scroll overflow-x-hidden`}
+        className={`font-sans bg-[#030014] overflow-y-scroll overflow-x-hidden`}
+        style={{ fontFamily: 'Helvetica, sans-serif' }} // Set Helvetica as the font
       >
         <StarsCanvas />
         <Navbar />
